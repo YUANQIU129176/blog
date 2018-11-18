@@ -31,10 +31,59 @@
                             发表于
                             <%= post.name %>
                         </div>
+                        <% if( post.uid == user.id ){ %>
+                            <a href="/post/edit/<%= post.id %>">编辑</a>
+                            <a href="/post/delete/<%= post.id%>">删除</a>
+                            <% } %>
                     </li>
                     <% }) %>
             </ul>
+
+            <!-- 分页按钮 -->
+            <div class="page-ctrl">
+                <span>当前页数<%=page%>/<%=Math.ceil(count / 5)%></span>
+                <div>
+                    <!--如果是第一页，隐藏上一页按钮-->
+
+                    <button class="mui-btn mui-btn--primary prev" <% if(page<=1){%>
+                        style="display:none" <%}%>
+                        >上一页</button>
+
+
+                    <!--如果是最后一页，隐藏下一页按钮-->
+
+                    <button class="mui-btn mui-btn--primary next" <% if(page>= Math.ceil(count / 5) ) {%>
+                        style="display:none"
+                        <% } %> 
+                    >下一页</button>
+                </div>
+            </div>
         </div>
 </body>
 
 </html>
+<script>
+    /* 
+                                                                                                                        1 当点击下一页时 页面跳转到下一页
+                                                                                                                        2 当前页数页跟着动态改变
+                                                                                                                    */
+    /* 下一页 */
+    var page = <%=page%>;
+    //    1 注册事件
+    var next = document.querySelector(".next");
+    var prev = document.querySelector(".prev");
+    // 2点击触发
+    next.addEventListener("click", function() {
+        page++;
+        // alert('dd');
+        // 3 实现跳转到下一页的逻辑
+        location.href = `/?page=${page}`;
+    });
+    // 上一页
+    prev.addEventListener("click", function() {
+        page--;
+        // alert('dd');
+        // 3 实现跳转到下一页的逻辑
+        location.href = `/?page=${page}`;
+    });
+</script>

@@ -7,15 +7,20 @@ exports.indexView = function(req, res) {
     if (!req.session.user) {
         user = {};
     }
-
-    // 3 让添加的文章页在首页上显示
-    // 3.1 引入函数
-    db.dumpIndex(function(results) {
-        console.log(results);
-        res.render("index", {
-            user: user,
-            posts: results
-        });
+    // 分页逻辑
+    // 获取地址栏的page数据
+    const page = req.query.page || 1;
+    db.findPostByPage(page, function(results) {
+        // console.log(results);
+        db.PostsCount(function(count) {
+            // console.log(count);
+            let counts = count[0].count;
+            res.render("index", {
+                user: user,
+                posts: results, //只有五条数据
+                page: page,
+                count: counts
+            });
+        })
     })
-
 }

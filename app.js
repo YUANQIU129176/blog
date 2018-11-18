@@ -49,6 +49,16 @@ app.post("/post/add", post.postSubmit);
 
 // 退出按钮
 app.get("/logout", login.loginOut);
+
+// 详情页
+app.get("/post/detail/:pid", post.postDetail);
+
+// 编辑
+app.get("/post/edit/:pid", next, post.postEdit);
+app.post("/post/edit/:pid", post.postEditNew);
+
+// 删除文章数据
+app.get("/post/delete/:pid", next, post.postDel);
 //开启服务器
 app.listen("3010", () => {
     console.log('服务器开启成功');
