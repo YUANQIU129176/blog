@@ -1,0 +1,100 @@
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background: #eee!important;
+}
+
+*{
+  margin:0;
+  padding:0;
+}
+
+li{
+  list-style: none;
+}
+
+#menu{
+  height:80px;
+  padding:0 50px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  border-bottom: 1px #eee solid;
+  background: #232831;
+  color:#fff;
+}
+
+#menu a{
+  margin:10px;  
+  color:#fff;
+}
+
+.posts{
+  width:750px;
+  margin:50px auto;
+}
+
+.post-title{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.posts h2{
+  font-size: 14px;
+  color:#666;
+}
+
+.post-item{
+  background:#fff;
+  margin-bottom: 20px;
+  padding:10px 20px;
+}
+
+.post-item h4{
+  line-height: 1.5;
+}
+
+.post-item .post-info{
+  color:#999;
+  margin-top:5px;
+}
+
+.page-ctrl{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.page-ctrl span{
+  color:#999;
+}
+
+.form-white{
+  width:500px;
+  background:#fff;
+  padding:50px;
+  position: absolute;
+  left:50%;
+  top:50%;
+  margin-left:-300px;
+  margin-top: -250px;
+}
+
+.form-post{
+  margin:50px auto;
+  width:600px;
+  padding:50px;
+  background: #fff;
+}
+
+.post-info a{
+  margin-left:10px;
+}
+
+.post-detail{
+  width:750px;
+  margin:50px auto;
+  box-sizing: border-box;
+  background: #fff;
+  padding:50px;
+}

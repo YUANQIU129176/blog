@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>编辑文章</title>
+    <link rel='stylesheet' href='/style/style.css' />
+    <link rel='stylesheet' href='/style/mui.min.css' />
+</head>
+
+<body>
+    <form class="mui-form form-post" action='/post/add' method='post'>
+        <legend>编辑文章</legend>
+        <div class="mui-textfield">
+            <input type="text" placeholder="请输入标题" name='title'>
+        </div>
+        <div class="mui-textfield">
+            <textarea placeholder="请输入文章内容" name="content"></textarea>
+        </div>
+        <button type="submit" class="mui-btn mui-btn--primary">发布</button>
+    </form>
+</body>
+
+</html>

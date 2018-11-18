@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<head>
+    <title>首页</title>
+    <link rel='stylesheet' href='/style/style.css' />
+    <link rel='stylesheet' href='/style/mui.min.css' />
+</head>
+
+<body>
+    <% include header %>
+
+        <div class="posts">
+            <div class="post-title">
+                <h2>文章列表</h2>
+                <a href="/post/add">
+                    <button class="mui-btn">发表文章</button>
+                </a>
+            </div>
+            <ul>
+                <% posts.forEach(post => { %>
+                    <li class="post-item">
+                        <h4>
+                            <a href="/post/detail/<%= post.id %>">
+                                <%= post.title %>
+                            </a>
+                        </h4>
+                        <div>
+                            <%= post.content %>
+                        </div>
+                        <div class="post-info">
+                            发表于
+                            <%= post.name %>
+                        </div>
+                    </li>
+                    <% }) %>
+            </ul>
+        </div>
+</body>
+
+</html>
