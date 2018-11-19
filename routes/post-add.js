@@ -31,10 +31,13 @@ exports.postDetail = function(req, res) {
     // 1 获取通过路由的方式传递的id值
     const pid = req.params.pid;
     db.PostsDetailId(pid, function(results) {
-        // console.log(results.moment);
-        res.render("detail-post", {
-            // 传递的数据
-            value: results[0]
+        db.postCommentId(pid, function(comments) {
+            res.render("detail-post", {
+                // 传递的数据
+                value: results[0],
+                user: req.session.user,
+                comments: comments
+            })
         })
     })
 }
@@ -73,7 +76,7 @@ exports.postEditNew = function(req, res) {
 
 // 删除按钮的实现
 exports.postDel = function(req, res) {
-    const pid = req.params.pid;
+    // const pid = req.params.pid;  
     db.deletePostById(pid, function(results) {
         res.redirect("back");
     })

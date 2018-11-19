@@ -19,6 +19,7 @@ app.use(session({
     secret: 'keyboard cat',
     resave: false,
     saveUninitialized: true
+
 }))
 
 // 引入自定义中间件 判断用户是否登录了
@@ -28,6 +29,7 @@ app.set('view engine', 'ejs');
 
 // 开启首页路由 
 // 1 引入自定义模块
+const comment = require("./routes/comment");
 const index = require("./routes/index");
 app.get("/", index.indexView)
     // 开其注册页路由 渲染的
@@ -41,7 +43,6 @@ app.post('/register', register.submit);
 const login = require("./routes/login");
 app.get("/login", login.render);
 app.post("/login", login.submit);
-
 // 文章页
 const post = require("./routes/post-add");
 app.get("/post/add", next, post.postAdd);
@@ -59,6 +60,9 @@ app.post("/post/edit/:pid", post.postEditNew);
 
 // 删除文章数据
 app.get("/post/delete/:pid", next, post.postDel);
+
+// 发表评论
+app.post("/comment/add/:pid", next, comment.commentPost);
 //开启服务器
 app.listen("3010", () => {
     console.log('服务器开启成功');

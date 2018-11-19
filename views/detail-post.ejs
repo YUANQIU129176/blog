@@ -5,6 +5,21 @@
     <meta charset="UTF-8">
     <title>详情</title>
 </head>
+<style>
+    .comment textarea {
+        width: 300px;
+        margin: 30px 0;
+    }
+    
+    .comment button {
+        display: block;
+        width: 80px;
+    }
+    
+    ul {
+        list-style: none;
+    }
+</style>
 
 <body>
     <h4>
@@ -17,6 +32,26 @@
     <div>
         <%= value.content %>
     </div>
+
+    <!-- 评论页 -->
+    <div class="comment">
+        <% if(user){ %>
+            <form action="/comment/add/<%= value.id %>" method="POST">
+                <textarea rows=5 placeholder="说点什么..." name="content"></textarea>
+                <button type="submit">确认</button>
+            </form>
+            <% } else { %>
+                <a href="/login">先登录，再评论</a>
+                <% }  %>
+    </div>
+    <ul>
+        <% comments.forEach(function(value){  %>
+            <li>
+                <%= value.name %>:
+                    <%= value.content %>
+            </li>
+            <%  }) %>
+    </ul>
 </body>
 
 </html>
