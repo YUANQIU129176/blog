@@ -24,6 +24,11 @@ app.use(session({
 
 // 引入自定义中间件 判断用户是否登录了
 const next = require("./lib/middleware/auth");
+
+//引入日志的中间件
+const logs = require("./lib/middleware/logs");
+app.use(logs);
+
 // 配置模版ejs路由
 app.set('view engine', 'ejs');
 
@@ -32,8 +37,9 @@ app.set('view engine', 'ejs');
 const comment = require("./routes/comment");
 const index = require("./routes/index");
 app.get("/", index.indexView)
-    // 开其注册页路由 渲染的
-    // 引入自定义模块
+
+// 开其注册页路由 渲染的
+// 引入自定义模块
 const register = require("./routes/register");
 app.get("/register", register.render);
 app.post('/register', register.submit);
@@ -63,6 +69,11 @@ app.get("/post/delete/:pid", next, post.postDel);
 
 // 发表评论
 app.post("/comment/add/:pid", next, comment.commentPost);
+
+// 编辑个人信息
+const account = require("./routes/account");
+app.get("/account", next, account.accountUser);
+app.post("/account/submit", next, account.accountSubmit);
 //开启服务器
 app.listen("3010", () => {
     console.log('服务器开启成功');

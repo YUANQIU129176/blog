@@ -9,7 +9,11 @@ exports.commentPost = function(req, res) {
         postid: req.params.pid
     }
     db.insertComment(data, function(results) {
-        // console.log(data);
-        res.redirect("back");
+        // 评论的条数
+        db.commentNum(req.params.pid, function() {
+            // console.log(data);
+            res.redirect("back");
+        })
+
     })
 }

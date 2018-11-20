@@ -1,12 +1,12 @@
 <% if (user.name) { %>
     <div id='menu'>
-      <span class='name'><%= user.name %></span>
-      <a href='/logout'>退出</a>
+        <img src="/upload/<%=user.avator%>" alt="">
+        <span class='name'><a href="/account"><%= user.name %></a></span>
+        <a href='/logout'>退出</a>
     </div>
-  <% } else { %>
-    <div id='menu'>
-      <a href='/login'>登录</a>
-      <a href='/register'>注册</a>
-    </div>
-  <% } %>
-  
+    <% } else { %>
+        <div id='menu'>
+            <a href='/login'>登录</a>
+            <a href='/register'>注册</a>
+        </div>
+        <% } %>

@@ -1,5 +1,6 @@
 // 引入数据库
 const db = require("../lib/db");
+const moment = require("moment");
 // 文章页
 exports.postAdd = function(req, res) {
     // res.send("ddd")
@@ -26,20 +27,35 @@ exports.postSubmit = function(req, res) {
             res.redirect("/");
         })
     }
-    // 闲情页
+    // 祥情页
 exports.postDetail = function(req, res) {
     // 1 获取通过路由的方式传递的id值
     const pid = req.params.pid;
-    db.PostsDetailId(pid, function(results) {
-        db.postCommentId(pid, function(comments) {
-            res.render("detail-post", {
-                // 传递的数据
-                value: results[0],
-                user: req.session.user,
-                comments: comments
+
+    // 1.1添加浏览量
+    db.commentsReadNUm(pid, function() {
+
+        // 1.2闲请页面的渲染
+        db.PostsDetailId(pid, function(results) {
+
+            // 返回来的数据
+            const post = results[0];
+
+            // 获取规范的时间
+            post.moment = moment(post.moment).format('YYYY-MM-DD hh:mm:ss');
+
+            // 评论的条数
+            db.postCommentId(pid, function(comments) {
+                res.render("detail-post", {
+                    // 传递的数据
+                    value: post,
+                    user: req.session.user,
+                    comments: comments
+                })
             })
         })
     })
+
 }
 
 // 编辑页面的实现
@@ -49,8 +65,7 @@ exports.postDetail = function(req, res) {
 */
 exports.postEdit = function(req, res) {
         const pid = req.params.pid;
-        // console.log(pid);
-        // 2
+
         // 2调用写入数据库
         db.postEdit(pid, function(results) {
             // console.log(results);

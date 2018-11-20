@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>个人信息</title>
+    <link rel='stylesheet' href='/style/style.css' />
+    <link rel='stylesheet' href='/style/mui.min.css' />
+</head>
+
+<body>
+    <form class="mui-form form-white" action='/account/submit' method='post' enctype="multipart/form-data">
+        <legend>编辑信息</legend>
+        <div class="mui-textfield">
+            <input type="text" name='username' value="<%=user.name%>">
+        </div>
+        <div class="mui-textfield">
+            <input type="password" name="password" value="<%=user.pass%>">
+        </div>
+        <div class="mui-textfield">
+            <div class="avator">
+                <img id="img" src="/upload/<%= user.avator %>" alt="">
+            </div>
+            <h2>头像</h2>
+            <input type="file" name="avator" value="<%user.avator%>" id="fileShow">
+        </div>
+        <button type="submit" class="mui-btn mui-btn--primary">修改</button>
+    </form>
+</body>
+
+</html>
+<script>
+    // 实现的功能是改变图片时 图片显示在页面上
+    // 1 注册文件改变事件 或元素
+    var fileShow = document.querySelector('#fileShow');
+    var img = document.querySelector('#img');
+    // 2 注册事件
+    fileShow.addEventListener("change", function(e) {
+        // console.log(this.files);
+        // 3获取文件对象
+        var filesObj = this.files[0];
+
+        // 4构造文件读取对象、
+        var readFile = new FileReader();
+
+        // 5 获取文件data路径
+        readFile.readAsDataURL(filesObj);
+
+        //  6 监听事件加载
+        readFile.onload = function(e) {
+            // 通过e.target.result拿到文件路径
+            img.src = e.target.result;
+        }
+    })
+</script>
+
+</html>
